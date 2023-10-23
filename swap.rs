@@ -19,10 +19,8 @@ fn _entry(
 ) -> ProgramResult {
     msg!("Rust swap program entrypoint");
 
-    // Parse the input data to determine the swap details
     let swap_instruction: SwapInstruction = SwapInstruction::unpack(input)?;
     
-    // Ensure that the accounts list is the correct length for the given swap type
     let num_required_accounts = match swap_instruction.swap_type {
         SwapType::SOLToToken | SwapType::TokenToSOL => 4,
         SwapType::TokenToToken => 5,
@@ -33,15 +31,12 @@ fn _entry(
 
     match swap_instruction.swap_type {
         SwapType::SOLToToken => {
-            // Perform SOL to Token swap logic
             sol_to_token_swap(accounts, swap_instruction.amount)?;
         }
         SwapType::TokenToSOL => {
-            // Perform Token to SOL swap logic
             token_to_sol_swap(accounts, swap_instruction.amount)?;
         }
         SwapType::TokenToToken => {
-            // Perform Token to Token swap logic
             token_to_token_swap(accounts, swap_instruction.amount)?;
         }
     }
@@ -76,16 +71,28 @@ impl SwapInstruction {
 }
 
 fn sol_to_token_swap(accounts: &[AccountInfo], amount: u64) {
-    // Implement SOL to Token swap logic
-    // ...
+  
+    let owner_account = next_account_info(accounts[0]).unwrap();
+    let source_sol_account = next_account_info(accounts[1]).unwrap();
+    let target_token_account = next_account_info(accounts[2]).unwrap();
+
+  .
 }
+
 
 fn token_to_sol_swap(accounts: &[AccountInfo], amount: u64) {
-    // Implement Token to SOL swap logic
-    // ...
+    let owner_account = next_account_info(accounts[0]).unwrap();
+    let source_token_account = next_account_info(accounts[1]).unwrap();
+    let target_sol_account = next_account_info(accounts[2]).unwrap();
+
+    
 }
 
+
 fn token_to_token_swap(accounts: &[AccountInfo], amount: u64) {
-    // Implement Token to Token swap logic
-    // ...
+    let owner_account = next_account_info(accounts[0]).unwrap();
+    let source_token_account = next_account_info(accounts[1]).unwrap();
+    let target_token_account = next_account_info(accounts[2]).unwrap();
+
+  
 }
